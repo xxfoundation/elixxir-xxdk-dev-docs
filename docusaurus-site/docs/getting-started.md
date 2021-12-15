@@ -180,7 +180,7 @@ To view the current user identity for a client, call the `GetUser()` method:
 user := client.GetUser()
 ```
 
-For more information on default network parameters and how to override them, see *Fetching Network Parameters*.
+<!-- For more information on default network parameters and how to override them, see *Fetching Network Parameters*. -->
 
 ### Register a Message Listener
 
@@ -374,7 +374,7 @@ To generate a contact file (such as `user-contact.json` above) via the CLI, use 
 
 Note that when duplicating folders to create multiple client instances locally, you need to ensure you're not also copying over contact files and session folders. You can comfortably delete session folders since new cryptographic identities will be generated on each new `NewClient()` call (but only if there isn't an existing session).
 
-For more detail on requesting authenticated channels, see *Requesting and Accepting Authenticated Channels*.
+<!-- For more detail on requesting authenticated channels, see *Requesting and Accepting Authenticated Channels*. -->
 
 ### Accept Authenticated Channels
 
@@ -447,7 +447,7 @@ exist, or if the contact passed in does not match the contact received in a requ
 
 `ConfirmAuthenticatedChannel()` can also be retried (such as in cases where the network was initially unhealthy).
 
-For more detail on accepting authenticated channels, see *Requesting and Accepting Authenticated Channels*.
+<!-- For more detail on accepting authenticated channels, see *Requesting and Accepting Authenticated Channels*. -->
 
 ### Send E2E and Unsafe Messages
 
@@ -568,7 +568,7 @@ import (
 )
 ```
 
-For more detail on sending messages and the different message types, see *Sending and Receiving Messages*.
+<!-- For more detail on sending messages and the different message types, see *Sending and Receiving Messages*. -->
 
 ### Receive Messages
 
@@ -619,7 +619,7 @@ type Receive struct {
 
 In addition to the payload, you can access other details such as the sender's ID, their recipient ID, the round ID in which the message was sent, the timestamp for when the sender sent the message, and more.
 
-For more detail on receiving messages and the different message types, see *Sending and Receiving Messages*.
+<!-- For more detail on receiving messages and the different message types, see *Sending and Receiving Messages*. -->
 
 ### Putting It All Together
 
@@ -827,6 +827,6 @@ func main() {
 
 If you'd like to duplicate this app to simulate multiple users, you can simply comment out irrelevant lines when you need to switch between sending or requesting and receiving or accepting messages and authenticated channels.
 
-### Next Steps: The API Reference
+<!-- ### Next Steps: The API Reference
 
-For more comprehensive information on using the Client API, see the API reference docs.
+For more comprehensive information on using the Client API, see the API reference docs. -->
