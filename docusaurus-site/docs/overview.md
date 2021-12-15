@@ -26,7 +26,7 @@ It's easy to get started with the xxDK. Explore these links below to find what y
 
 The [Getting Started](./getting-started) guide is the place to begin if you're looking to get up-and-running quickly.
 
-### The API Reference
+<!-- ### The API Reference
 
 The API Reference provides extensive detail on the different types and functions exposed by the Client API.
 
@@ -36,4 +36,4 @@ Use the technical glossary to find meanings to unfamiliar terms and concepts spe
 
 ### FAQs
 
-Refer to the FAQ for answers to some of our users' most common questions.
+Refer to the FAQ for answers to some of our users' most common questions. -->
