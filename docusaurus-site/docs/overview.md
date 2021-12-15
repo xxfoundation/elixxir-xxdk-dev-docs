@@ -14,10 +14,11 @@ Some use cases for integrating the API into your applications include (but are n
 - Voting applications, such as [Votexx](https://votexx.org/)
 - Secure messaging apps for private communications
 
-<aside>
-💡 If you'd like to learn more about the cMix protocol and what it offers, a good place to start is [the cMix whitepaper](https://xx.network/xxcMixwhitepaper.pdf).
+:::info
 
-</aside>
+If you'd like to learn more about the cMix protocol and what it offers, a good place to start is [the cMix whitepaper](https://xx.network/xxcMixwhitepaper.pdf).
+
+:::
 
 It's easy to get started with the xxDK. Explore these links below to find what you need.
 
