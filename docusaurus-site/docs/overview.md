@@ -24,7 +24,7 @@ It's easy to get started with the xxDK. Explore these links below to find what y
 
 ### Getting Started
 
-The Getting Started guide is the place to begin if you're looking to get up-and-running quickly.
+The [Getting Started](./getting-started) guide is the place to begin if you're looking to get up-and-running quickly.
 
 ### The API Reference
 
