@@ -12,10 +12,11 @@ The rest of this document outlines the steps for building a simple messaging app
 
 The command-line tool that comes with the client is useful for testing network functionality. It also comes in handy for acquiring an [NDF](https://xxnetwork.wiki/index.php/Network_Definition_File_(NDF)), a JSON file that describes the Nodes, Gateways, and other servers on the network, as well as how to communicate with them.
 
-<aside>
-💡 The NDF is required for registering within the xxDK. Currently, it can only be acquired via the command-line. However, an up-to-date copy will be available for download soon on the xx network website.
+:::note
 
-</aside>
+The NDF is required for registering within the xxDK. Currently, it can only be acquired via the command-line. However, an up-to-date copy will be available for download soon on the xx network website.
+
+:::
 
 Here are the commands for cloning and compiling the client (assuming golang 1.13 or newer):
 
@@ -92,12 +93,13 @@ import (
 
 You'll need to import a few more packages along the way. However, we want to avoid unused import warnings from the compiler, so we'll include them as needed. It's straightforward to switch the external libraries out for any alternatives you prefer.
 
-<aside>
-💡 1. To ensure you're using the latest release version of the client, you can run `go get [gitlab.com/elixxir/client@release](http://gitlab.com/elixxir/client@release)`. This will update your `go.mod` file automatically.
+:::info
 
-2. It's also important to note, before continuing, that clients need to perform certain actions in a specified order, such as registering certain handlers before starting network threads. Additionally, some actions cannot be performed until the network is in a healthy state.
+1. To ensure you're using the latest release version of the client, you can run `go get [gitlab.com/elixxir/client@release](http://gitlab.com/elixxir/client@release)`. This will update your `go.mod` file automatically.
 
-</aside>
+1. It's also important to note, before continuing, that clients need to perform certain actions in a specified order, such as registering certain handlers before starting network threads. Additionally, some actions cannot be performed until the network is in a healthy state.
+
+:::
 
 ### Create a Client Object
 
@@ -144,10 +146,11 @@ The `NewClient()` function expects multiple arguments:
 
 Once you've created a client object, the next step is to load and log in to the session you just initialized.
 
-<aside>
-💡 Note that there are other types of clients you can create, such as a precanned client or a vanity client. For instance, a vanity client (`NewVanityClient()`) will create a user with a `receptionID` that starts with a supplied prefix. This is similar to Bitcoin's vanity addresses. See the API reference for more detail.
+:::info
 
-</aside>
+Note that there are other types of clients you can create, such as a precanned client or a vanity client. For instance, a vanity client (`NewVanityClient()`) will create a user with a `receptionID` that starts with a supplied prefix. This is similar to Bitcoin's vanity addresses. <!-- See the API reference for more detail. -->
+
+:::
 
 ### Login to Your Client Session
 
@@ -211,12 +214,13 @@ func (sw *Switchboard) RegisterChannel(name string, user *id.ID,
 
 `RegisterChannel()` returns a listener ID that you want to keep handy if you need to delete the listener at a later time.
 
-<aside>
-💡 Note that we've used `swboard` for the variable holding the result of calling `client.GetSwitchboard()`, rather than `switchboard`. This avoids a clash with the imported `switchboard` package which is used to access the `AnyUser()` type.
+:::caution
 
-</aside>
+Note that we've used `swboard` for the variable holding the result of calling `client.GetSwitchboard()`, rather than `switchboard`. This avoids a clash with the imported `switchboard` package which is used to access the `AnyUser()` type.
 
-For more detail on registering message listeners, see *Registering Message Listeners*.
+:::
+
+<!-- For more detail on registering message listeners, see *Registering Message Listeners*. -->
 
 ### Start Network Threads
 
@@ -318,10 +322,11 @@ func (c *Client) RequestAuthenticatedChannel(recipient contact.Contact,
 
 The `RequestAuthenticatedChannel()` method returns the ID for the network round in which the request was sent, or an error if the request was unsuccessful (such as when a channel already exists or if a request was already received).
 
-<aside>
-💡 Note that `RequestAuthenticatedChannel()` will not run if the network state is not healthy. However, it can be retried until it's successful.
+:::info
 
-</aside>
+Note that `RequestAuthenticatedChannel()` will not run if the network state is not healthy. However, it can be retried until it's successful.
+
+:::
 
 In our example above, we used the recipientID. This can be accessed via `client.GetUser().GetContact().ID`. Here's what the Contact data structure (returned by `GetContact()`) looks like:
 
@@ -502,10 +507,11 @@ There are three steps involved in sending messages, whether it's an unsafe or en
 2. **Get default network parameters:** Next, you'll need to get the default network parameters, either using `params.GetDefaultUnsafe()` for unsafe message or `params.GetDefaultE2E()` for E2E messages. This again assumes you previously imported `[gitlab.com/elixxir/client/interfaces/params](http://gitlab.com/elixxir/client/interfaces/params)`.
 3. **Send your message:** Finally, you can send your message using `client.SendUnsafe()` or `client.SendE2E()`. This will return the list of rounds in which parts of your message was sent or an error if the call was unsuccessful.
 
-<aside>
-💡 In addition to the round IDs and error message, `client.SendE2E()` returns two additional items: the message ID and the timestamp for when the message was sent. See the API reference for more information.
+:::info
 
-</aside>
+In addition to the round IDs and error message, `client.SendE2E()` returns two additional items: the message ID and the timestamp for when the message was sent. <!-- See the API reference for more information. -->
+
+:::
 
 You can choose to send an unsafe or E2E payload, depending on whether an authenticated channel already exists between two users:
 
