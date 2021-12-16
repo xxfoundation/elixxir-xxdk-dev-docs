@@ -57,9 +57,9 @@ const config = {
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://git.xx.network/elixxir/xxdk-dev-docs',
             label: 'GitHub',
-            position: 'right',
+            position: 'left',
           },
         ],
       },
