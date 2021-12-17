@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  docusaurus:
+    build: .
+    ports:
+      - 3000:3000
+      - 35729:35729
+    volumes:
+      - ./docs:/app/docs
+      - ./docusaurus-site/blog:/app/website/blog
+      - ./docusaurus-site/core:/app/website/core
+      - ./docusaurus-site/i18n:/app/website/i18n
+      - ./docusaurus-site/pages:/app/website/pages
+      - ./docusaurus-site/static:/app/website/static
+      - ./docusaurus-site/sidebars.json:/app/website/sidebars.json
+      - ./docusaurus-site/siteConfig.js:/app/website/siteConfig.js
+    working_dir: /app/website
