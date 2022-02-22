@@ -23,15 +23,15 @@ The client API supports golang versions 1.17 or newer. You can find the most rec
 
 It's easy to get started with the xxDK. Explore these links below to find what you need.
 
-### [Getting Started](./getting-started.md)
+### [Getting Started](./getting-started)
 
 The Getting Started guide is where to begin if you're looking to get up and running quickly.
 
-### [The API Reference](./quick-reference.md)
+### [The API Reference](./quick-reference)
 
 The API Reference provides extensive detail on the different types and functions exposed by the Client API.
 
-### [Technical Glossary](./technical-glossary.md)
+### [Technical Glossary](./technical-glossary)
 
 Use the technical glossary to find meanings to unfamiliar terms and concepts specific to the cMix system.
 
