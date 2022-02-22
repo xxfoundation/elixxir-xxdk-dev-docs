@@ -7,7 +7,7 @@ sidebar_position: 3
 This document provides brief descriptions of all public functions, types, and interfaces exposed by the Client API (xxDK). <!-- Each item links to a page with more detail.  -->
 
 :::note
-If you are new to the xxDK, you can start with the [Overview](./overview) and [Getting Started](./getting-started) docs.
+If you are new to the xxDK, you can start with the [Overview](/) and [Getting Started](./getting-started) docs.
 :::
 
 Note that if you're running the client locally, you can use `go doc` to explore the list of functions and interfaces.

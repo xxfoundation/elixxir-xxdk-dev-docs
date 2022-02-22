@@ -10,7 +10,7 @@ const config = {
   tagline: 'The frontend of the CMix protocol',
   url: 'https://xxdk-dev.xx.network',
   baseUrl: '/',
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'xxnetwork', // Usually your GitHub org/user name.
@@ -27,12 +27,7 @@ const config = {
           // Please change this to your repo.
           editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/main/website/blog/',
-        },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -56,7 +51,6 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          // {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://git.xx.network/elixxir/xxdk-dev-docs',
             label: 'GitHub',
@@ -67,15 +61,6 @@ const config = {
       footer: {
         style: 'dark',
         links: [
-          // {
-          //   title: 'Docs',
-          //   items: [
-          //     {
-          //       label: 'Tutorial',
-          //       to: '/docs/intro',
-          //     },
-          //   ],
-          // },
           {
             title: 'Community',
             items: [
@@ -96,10 +81,6 @@ const config = {
           {
             title: 'More',
             items: [
-              //{
-              //  label: 'Blog',
-              //  to: '/blog',
-              //},
               {
                 label: 'GitHub',
                 href: 'https://github.com/facebook/docusaurus',
@@ -107,7 +88,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} xx network. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
