@@ -7,7 +7,7 @@ stages:
 test:
   stage: test
   script:
-  - cd website
+  - cd docusaurus-site
   - yarn install
   - yarn build
   - mv ./build ../test
@@ -20,7 +20,7 @@ test:
 pages:
   stage: deploy
   script:
-  - cd website
+  - cd docusaurus-site
   - yarn install
   - yarn build
   - mv ./build ../public
