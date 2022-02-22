@@ -1,0 +1,31 @@
+image: node:15.12-alpine3.13
+
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  script:
+  - cd website
+  - yarn install
+  - yarn build
+  - mv ./build ../test
+  artifacts:
+    paths:
+    - test
+  rules:
+    - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
+
+pages:
+  stage: deploy
+  script:
+  - cd website
+  - yarn install
+  - yarn build
+  - mv ./build ../public
+  artifacts:
+    paths:
+    - public
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
