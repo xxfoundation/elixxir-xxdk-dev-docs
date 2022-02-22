@@ -23,9 +23,8 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          routeBasePath: '/',
+          routeBasePath: '/'
           // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
         },
         blog: false,
         theme: {
@@ -53,7 +52,7 @@ const config = {
           },
           {
             href: 'https://git.xx.network/elixxir/xxdk-dev-docs',
-            label: 'GitHub',
+            label: 'GitLab',
             position: 'left',
           },
         ],
@@ -65,16 +64,20 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: 'Twitter',
+                href: 'https://twitter.com/xx_network',
               },
               {
                 label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                href: 'https://discord.gg/Y8pCkbK',
               },
               {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                label: 'Telegram',
+                href: 'https://t.me/xxnetwork',
+              },
+              {
+                label: 'YouTube',
+                href: 'https://www.youtube.com/c/xxnetwork',
               },
             ],
           },
@@ -82,8 +85,8 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                label: 'GitLab',
+                href: 'https://git.xx.network/elixxir/xxdk-dev-docs',
               },
             ],
           },
