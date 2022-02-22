@@ -2,12 +2,12 @@
 sidebar_position: 3
 ---
 
-# Quick Reference
+# API Quick Reference
 
 This document provides brief descriptions of all public functions, types, and interfaces exposed by the Client API (xxDK). <!-- Each item links to a page with more detail.  -->
 
 :::note
-If you're new to using the xxDK, you can start with the [Overview](./overview) and [Getting Started](./getting-started) docs.
+If you are new to the xxDK, you can start with the [Overview](./overview) and [Getting Started](./getting-started) docs.
 :::
 
 Note that if you're running the client locally, you can use `go doc` to explore the list of functions and interfaces.
@@ -119,7 +119,7 @@ func NewPrecannedClient(precannedID uint, defJSON, storageDir string,
         password []byte) error
 ```
 
-`NewPrecannedClient` creates an insecure user with predetermined keys with nodes. It creates client storage, generates keys, connects, and registers with the network. Note that this does not register a username/identity, but merely creates a new cryptographic identity for adding such information at a later date.
+`NewPrecannedClient` is used for integration testing and should not be used unless you are working on the cMix gateway and servers. You cannot connect to any public networks with a precanned client.
 
 ### func NewProtoClient_Unsafe
 
@@ -128,7 +128,11 @@ func NewProtoClient_Unsafe(ndfJSON, storageDir string, password,
         protoClientJSON []byte) error
 ```
 
-`NewProtoClient_Unsafe` initializes a client object from a JSON containing predefined cryptographic which defines a user. This is designed for some specific deployment procedures and is generally unsafe.
+`NewProtoClient_Unsafe` initializes a client object from a JSON containing predefined cryptographic which defines a user. This is designed for some specific deployment procedures and is generally unsafe. 
+
+:::note
+`NewProtoClient_Unsafe` is planned to be deprecated in favor of a new account backup API.
+:::
 
 ### func NewVanityClient
 
@@ -189,7 +193,7 @@ func LoginWithProtoClient(storageDir string, password []byte, protoClientJSON []
 func OpenClient(storageDir string, password []byte, parameters params.Network) (*Client, error)
 ```
 
-Open a client session, but don't connect to the network or log in.
+Open a client session, but do not connect to the network or log in.
 
 ### func (*Client) AddService
 
@@ -205,7 +209,7 @@ func (c *Client) AddService(sp Service) error
 func (c *Client) ConfirmAuthenticatedChannel(recipient contact.Contact) (id.Round, error)
 ```
 
-`ConfirmAuthenticatedChannel` creates an authenticated channel out of a valid received request and sends a message to the requestor that the request has been confirmed. It will not run if the network state is not healthy. An error will be returned if a channel already exists, if a request doesn’t exist, or if the passed in contact does not exactly match the received request. Can be retried.
+`ConfirmAuthenticatedChannel` creates an authenticated channel out of a valid received request and sends a message to the requestor that the request has been confirmed. It will not run if the network state is not healthy. An error will be returned if a channel already exists, if a request does not exist, or if the passed in contact does not exactly match the received request. Can be retried.
 
 ### func (*Client) ConstructProtoUerFile
 
@@ -215,6 +219,14 @@ func (c *Client) ConstructProtoUerFile() ([]byte, error)
 
 `ConstructProtoUerFile` is a helper function which is used for proto client testing. This is used for development testing.
 
+### func (*Client) DeleteAllRequests
+
+```go
+func (c *Client) DeleteAllRequests() error
+```
+
+`DeleteAllRequests` clears all requests from client's auth storage.
+
 ### func (*Client) DeleteContact
 
 ```go
@@ -222,6 +234,22 @@ func (c *Client) DeleteContact(partnerId *id.ID) error
 ```
 
 `DeleteContact` removes a partner from the client's storage.
+
+### func (*Client) DeleteReceiveRequests
+
+```go
+func (c *Client) DeleteReceiveRequests() error
+```
+
+`DeleteReceiveRequests` clears receive requests from client's auth storage.
+
+### func (*Client) DeleteSentRequests
+
+```go
+func (c *Client) DeleteSentRequests() error
+```
+
+`DeleteSentRequests` clears sent requests from client's auth storage.
 
 ### func (*Client) GetAuthRegistrar
 
@@ -277,7 +305,7 @@ func (c *Client) GetNetworkInterface() interfaces.NetworkManager
 func (c *Client) GetNodeRegistrationStatus() (int, int, error)
 ```
 
-`GetNodeRegistrationStatus` gets the current state of node registration in the network. It returns the total number of nodes in the NDF and the number of those which the client is currently registered with. An error is returned if the network is not healthy.
+`GetNodeRegistrationStatus` gets the current state of node registration in the network. It returns the total number of nodes in the NDF and the number of those with which the client is currently registered. An error is returned if the network is not healthy.
 
 ### func (*Client) GetPreferredBins
 
@@ -375,6 +403,10 @@ func (c *Client) MakePrecannedAuthenticatedChannel(precannedID uint) (contact.Co
 ```
 
 `MakePrecannedAuthenticatedChannel` creates an insecure e2e relationship with a precanned user.
+
+:::note
+`MakePrecannedAuthenticatedChannel` is used for integration testing and is unavailable on public networks.
+:::
 
 ### func (*Client) MakePrecannedContact
 
