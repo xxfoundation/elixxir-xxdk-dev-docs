@@ -10,6 +10,10 @@ test:
   - cd docusaurus-site
   - yarn install
   - yarn build
+  - mv ./build ../test
+  artifacts:
+    paths:
+    - test
   rules:
     - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
 
