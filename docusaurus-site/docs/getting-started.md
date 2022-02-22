@@ -163,11 +163,11 @@ if _, err := os.Stat(sessionPath); os.IsNotExist(err) {
 
 There are two crucial steps here. 
 
-1. You need to get an NDF, which you may already have from the *Download an NDF* step above. In the code above, we attempt to read from a file first, then try to download the release NDF with`DownloadAndVerifySignedNdfWithUrl()`, which dynamically downloads the NDF data a client needs from a specified URL. It takes two arguments:
+1. You need to get an NDF, which you may already have from the [*Download an NDF*](#download-an-ndf) step. In the code above, we attempt to read from a file first, then try to download the release NDF with`DownloadAndVerifySignedNdfWithUrl()`, which dynamically downloads the NDF data a client needs from a specified URL. It takes two arguments:
     - `url`:  A publicly accessible URL pointing to the NDF data.
     - `cert`: The certificate for the scheduling/registration server.
 
-:::caution
+:::note
 There are multiple URL/certificate pairs associated with different environments. It is extremely important to use the correct pair for your specific environment. These include:
 
 1. MainNet: [NDF URL](https://elixxir-bins.s3.us-west-1.amazonaws.com/ndf/mainnet.json) 
@@ -179,7 +179,7 @@ For each environment (for example, mainnet), you can download the NDF and extrac
 You can also copy and paste the certificates directly from the [command line source code](https://git.xx.network/elixxir/client/-/blob/d8832766fe26b02ef90b7998b2f0083be77b7b0f/cmd/root.go#L56).
 :::
 
-1. Once you have an NDF, you can then call the `NewClient()` function. This will create a storage object for user data and generate cryptographic keys. It will also connect and register the client with the cMix network. Although `NewClient()` does not register a username, it creates a new user based on a cryptographic identity. That makes it possible to add a username later.
+2. Once you have an NDF, you can then call the `NewClient()` function. This will create a storage object for user data and generate cryptographic keys. It will also connect and register the client with the cMix network. Although `NewClient()` does not register a username, it creates a new user based on a cryptographic identity. That makes it possible to add a username later.
 
 :::note
 Aside from the normal client created by `NewClient()`, there are other types of clients you can create, such as a precanned client or a vanity client. For instance, a vanity client (`NewVanityClient()`) will create a user with a `receptionID` that starts with a supplied prefix. This is similar to Bitcoin's vanity addresses. <!-- See the [API reference](./quick-reference.md) for more detail. -->
@@ -375,7 +375,7 @@ type Contact struct {
 }
 ```
 
-### Testing With CLI-generated Contact Files
+### Testing With CLI-Generated Contact Files
 
 We are running multiple client instances locally to test out authenticated channels for our messaging app. Although not the most ideal way to get it, this means that we can also fetch the recipient's contact details from CLI-generated contact files:
 
@@ -385,7 +385,7 @@ me := client.GetUser().GetContact()
 
 // Recipient's contact (read from a Client CLI-generated contact file)
 contactData, _ := ioutil.ReadFile("../user2/user-contact.json")
-// Assumes you have imported "[gitlab.com/elixxir/crypto/contact](http://gitlab.com/elixxir/crypto/contact)"
+// Assumes you have imported "gitlab.com/elixxir/crypto/contact"
 // which provides an `Unmarshal` function to convert the byte slice ([]byte) output
 // of `ioutil.ReadFile()` to the `Contact` type expected by `RequestAuthenticatedChannel()`
 recipientContact, _ := contact.Unmarshal(contactData)
@@ -514,11 +514,11 @@ jww.INFO.Printf("Message sent in RoundIDs: %+v\n", roundIDs)
 There are three steps involved when sending messages:
 
 1. **Generate message:** Sent messages have a `message.Send` type. You will need to include a recipient ID, the message payload (which should be a byte slice), and a message type (which should be `message.XxMessage`).
-2. **Get default network parameters:** Next, you will need to get the default network parameters using `params.GetDefaultE2E()`. This again assumes you previously imported `[gitlab.com/elixxir/client/interfaces/params](http://gitlab.com/elixxir/client/interfaces/params)`.
+2. **Get default network parameters:** Next, you will need to get the default network parameters using `params.GetDefaultE2E()`. This again assumes you previously imported `gitlab.com/elixxir/client/interfaces/params`.
 3. **Send message:** Finally, you can send your message using `client.SendE2E()`. This will return the list of rounds in which parts of your message were sent or an error if the call was unsuccessful.
 
 :::note
-In addition to the round IDs and error message, `client.SendE2E()` returns two additional items: the message ID and the timestamp for when the message was sent. See the API reference for more information.
+In addition to the round IDs and error message, `client.SendE2E()` returns two additional items: the message ID and the timestamp for when the message was sent. <!-- See the API reference for more information. -->
 :::
 
 <!-- For more detail on sending messages and the different message types, see *Sending and Receiving Messages*. -->
@@ -800,4 +800,4 @@ The sample app is also [available on Gitlab](https://git.xx.network/elixxir/xxdk
 
 ## Next Steps: The API Reference
 
-For more comprehensive information on using the Client API, see<!-- the Guides--> and [API reference](./quick-reference.md) docs.
+For more comprehensive information on using the Client API, see the<!-- Guides and--> [API reference](./quick-reference.md) docs.
