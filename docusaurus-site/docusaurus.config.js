@@ -10,7 +10,7 @@ const config = {
   tagline: 'The frontend of the CMix protocol',
   url: 'https://xxdk-dev.xx.network',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'xxnetwork', // Usually your GitHub org/user name.
