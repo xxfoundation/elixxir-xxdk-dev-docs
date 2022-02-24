@@ -13,7 +13,7 @@ Some use cases for integrating the API into your applications include (but are n
 
 - Banking applications
 - Voting applications, such as [Votexx](https://votexx.org/)
-- Secure messaging apps for private communications
+- Secure messaging apps for private communication, such as [xx messenger](https://xx.network/messenger/)
 
 :::info
 If you'd like to learn more about the cMix protocol and what it offers, a good place to start is [the cMix whitepaper](https://xx.network/xxcMixwhitepaper.pdf).
