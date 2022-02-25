@@ -105,7 +105,7 @@ import (
 You will need to import a few more packages along the way. However, we want to avoid unused import warnings from the compiler, so we will include them as needed. It is straightforward to switch the external libraries out for any alternatives you prefer.
 
 :::tip
-1. To ensure you are using the latest release version of the client, you can run `go get [gitlab.com/elixxir/client@release](http://gitlab.com/elixxir/client@release)`. This will update your `go.mod` file automatically.
+1. To ensure you are using the latest release version of the client, you can run `go get gitlab.com/elixxir/client@release`. This will update your `go.mod` file automatically.
 
 2. It is also important to note, before continuing, that clients need to perform certain actions in a specified order, such as registering specific handlers before starting network threads. Additionally, some actions cannot be performed until connected to the network. The API will return errors saying that the network is not in a healthy state when it is having trouble connecting.
 :::

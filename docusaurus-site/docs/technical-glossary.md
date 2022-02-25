@@ -24,7 +24,7 @@ See **[Session](#session-also-client-session)**
 
 ### **Command-Line Interface (CLI)**
 
-The Client CLI is a command-line tool intended for testing xx network functionality and not for regular user use. You can use it to send and accept messages and authenticated channels requests. For instructions on how to set it up, see *Testing Network Functionality Locally With the Client CLI*.
+The Client CLI is a command-line tool intended for testing xx network functionality and not for regular user use. You can use it to send and accept messages and authenticated channels requests. For instructions on how to set it up, see [*Set Up the Client Locally*](./getting-started.md/#set-up-the-client-locally).
 
 ## G
 
@@ -50,7 +50,7 @@ A process of renegotiating a key with a partner. This is triggered based on how 
 
 ### **Round**
 
-[TBD]
+The process by which batches of messages are processed by the mixnet. Rounds are represented by positive integers in logs.
 
 ## S
 
@@ -68,7 +68,7 @@ User Discovery helps users make first contact with other users. Using the "singl
 
 ### **Network Definition File (NDF)**
 
-A JSON file that describes the Nodes, Gateways, and other servers on the network, as well as how to communicate with them. For more detail, see *[Network Definition File (NDF)](https://xxnetwork.wiki/index.php/Network_Definition_File_(NDF))***.**
+A JSON file that describes the Nodes, Gateways, and other servers on the network, as well as how to communicate with them. For more detail, see *[Network Definition File (NDF)](https://xxnetwork.wiki/index.php/Network_Definition_File_(NDF))*.
 
 ### **Network Gateway**
 
