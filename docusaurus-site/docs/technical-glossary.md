@@ -50,7 +50,7 @@ A process of renegotiating a key with a partner. This is triggered based on how 
 
 ### **Round**
 
-The process by which batches of messages processed by the mixnet. Rounds are represented by positive integers in logs.
+The process by which batches of messages are processed by the mixnet. Rounds are represented by positive integers in logs.
 
 ## S
 
