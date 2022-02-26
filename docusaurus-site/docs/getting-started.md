@@ -404,8 +404,11 @@ To generate a contact file (such as `user-contact.json` above) via the CLI, use 
 
 ```bash
 # You may need to use the `--waitTimeout` flag to avoid timeout errors
-# For example, `--waitTimeout 1200` (time in seconds)
-./client.win64 --password user-password --ndf ndf.json -l client.log -s session-directory --writeContact user-contact.json --unsafe -m "Hello World, without E2E Encryption"  
+# For example, `--waitTimeout 200` (time in seconds)
+./client.win64 --password user-password --ndf ndf.json -l client.log -s session-directory --writeContact user-contact.json --unsafe -m "Hello World, without E2E Encryption" --waitTimeout 200
+Sending to yYAztmoCoAH2VIr00zPxnj/ZRvdiDdURjdDWys0KYI4D: Hello World, without E2E Encryption
+Message received: Hello World, without E2E Encryption
+Received 1  
 ```
 
 Note that when duplicating folders to create multiple client instances locally, you need to ensure you are not also copying over contact files and session folders. You can comfortably delete session folders since each new `NewClient()` call will generate new cryptographic identities, but only if there isn't an existing session.
