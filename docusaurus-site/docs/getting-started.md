@@ -20,7 +20,7 @@ The command-line tool that comes with the client is useful for testing network f
 The NDF is required for registering within the xxDK. It can be acquired via the command line or with the `DownloadAndVerifySignedNdfWithUrl()` function from the client API.
 :::
 
-Here are the commands for cloning and compiling the client (assuming golang 1.13 or newer). You’ll want to make sure to compile the right binary for your specific OS architecture:
+Here are the commands for cloning and compiling the client (assuming [golang 1.17 or newer](https://go.dev/doc/install)). You’ll want to make sure to compile the right binary for your specific OS architecture:
 
 ```bash
 git clone https://gitlab.com/elixxir/client.git client
