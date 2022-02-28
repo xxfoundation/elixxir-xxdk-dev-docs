@@ -10,7 +10,7 @@ The rest of this document outlines the steps for building a simple messaging app
 
 ## Set Up the Client Locally
 
-The following sections show how to connect to the public xx cMix network. When building your application, it is recommended to test with a [local instance of the cMix network](https://git.xx.network/elixxir/integration).
+<!-- The following sections show how to connect to the public xx cMix network. When building your application, it is recommended to test with a [local instance of the cMix network](https://git.xx.network/elixxir/integration). -->
 
 [Skip CLI setup](#import-the-api)
 
