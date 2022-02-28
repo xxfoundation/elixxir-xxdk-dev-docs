@@ -10,7 +10,7 @@ The rest of this document outlines the steps for building a simple messaging app
 
 ## Set Up the Client Locally
 
-The following sections show how to connect to the public xx cMix network. When building your application, it is recommended to test with a [local instance of the cMix network](https://git.xx.network/elixxir/integration).
+<!-- The following sections show how to connect to the public xx cMix network. When building your application, it is recommended to test with a [local instance of the cMix network](https://git.xx.network/elixxir/integration). -->
 
 [Skip CLI setup](#import-the-api)
 
@@ -20,7 +20,7 @@ The command-line tool that comes with the client is useful for testing network f
 The NDF is required for registering within the xxDK. It can be acquired via the command line or with the `DownloadAndVerifySignedNdfWithUrl()` function from the client API.
 :::
 
-Here are the commands for cloning and compiling the client (assuming golang 1.13 or newer). You’ll want to make sure to compile the right binary for your specific OS architecture:
+Here are the commands for cloning and compiling the client (assuming [golang 1.17 or newer](https://go.dev/doc/install)). You’ll want to make sure to compile the right binary for your specific OS architecture:
 
 ```bash
 git clone https://gitlab.com/elixxir/client.git client
@@ -404,8 +404,11 @@ To generate a contact file (such as `user-contact.json` above) via the CLI, use 
 
 ```bash
 # You may need to use the `--waitTimeout` flag to avoid timeout errors
-# For example, `--waitTimeout 1200` (time in seconds)
-./client.win64 --password user-password --ndf ndf.json -l client.log -s session-directory --writeContact user-contact.json --unsafe -m "Hello World, without E2E Encryption"  
+# For example, `--waitTimeout 200` (time in seconds)
+./client.win64 --password user-password --ndf ndf.json -l client.log -s session-directory --writeContact user-contact.json --unsafe -m "Hello World, without E2E Encryption" --waitTimeout 200
+Sending to yYAztmoCoAH2VIr00zPxnj/ZRvdiDdURjdDWys0KYI4D: Hello World, without E2E Encryption
+Message received: Hello World, without E2E Encryption
+Received 1  
 ```
 
 Note that when duplicating folders to create multiple client instances locally, you need to ensure you are not also copying over contact files and session folders. You can comfortably delete session folders since each new `NewClient()` call will generate new cryptographic identities, but only if there isn't an existing session.
