@@ -207,7 +207,7 @@ if err != nil {
 }
 ```
 
-Aside from logging you into your existing client session, the `Login()` function also initializes communication with the network and registers your client with the permissioning server. This enables you to keep track of network rounds.
+Aside from logging you into your existing client session, the `Login()` function also initializes communication with the network and registers your client with the [permissioning](./technical-glossary/#permissioning-server) server. This enables you to keep track of network rounds.
 
 To view the current user identity for a client, call the `GetUser()` method:
 
