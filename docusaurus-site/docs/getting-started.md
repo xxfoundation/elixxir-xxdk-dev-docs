@@ -131,7 +131,7 @@ statePath := "statePath"
 statePass := "password"
 // The following connects to mainnet. For historical reasons it is called a json file
 // but it is actually a marshalled file with a cryptographic signature attached.
-// This may change in the future. 
+// This may change in the future.
 ndfURL := "https://elixxir-bins.s3.us-west-1.amazonaws.com/ndf/mainnet.json"
 certificatePath := "mainnet.crt"
 ndfPath := "ndf.json"
@@ -141,10 +141,10 @@ if _, err := os.Stat(statePath); os.IsNotExist(err) {
 	var ndfJSON []byte
 	if ndfPath != "" {
 		ndfJSON, err = ioutil.ReadFile(ndfPath)
-    if err != nil {
+		if err != nil {
 			fmt.Printf("Could not read NDF: %+v", err)
-    }
-	} 
+		}
+	}
 	if ndfJSON == nil {
 		cert, err := ioutil.ReadFile(certificatePath)
 		if err != nil {
@@ -284,7 +284,7 @@ if err != nil {
 }
 
 waitUntilConnected := func(connected chan bool) {
-  // Assumes you have imported the `time` package
+	// Assumes you have imported the `time` package
 	waitTimeout := time.Duration(150)
 	timeoutTimer := time.NewTimer(waitTimeout * time.Second)
 	isConnected := false
@@ -330,13 +330,13 @@ In summary, `StartNetworkFollower()` kicks off tracking of the network. It start
 
 :::info
 
-Note that it’s normal to see an error that looks like the following when you start the network threads:
+Note that you may encounter an error such as the following when you start the network threads:
 
 ```
 ERROR 2022/03/01 21:23:30 Failed to register node: Failed to request key: rpc error: code = Unknown desc = unable to connect to target host 6MhL3ueewpss4stt98fNKrW/EJ5WD6JCAGQLvU8mb7MB.
 ```
 
-This is another possible variation:
+Here is another possible variation:
 
 ```
 ERROR 2022/03/01 12:32:51 Failed to register node: Failed to request key: rpc error: code = Unknown desc = rpc error: code = Unknown desc = Contacted server does not have an ndf to give
@@ -428,7 +428,7 @@ To generate a contact file (such as `user-contact.json` above) via the CLI, use 
 ./client.win64 --password user-password --ndf ndf.json -l client.log -s session-directory --writeContact user-contact.json --unsafe -m "Hello World, without E2E Encryption" --waitTimeout 200
 Sending to yYAztmoCoAH2VIr00zPxnj/ZRvdiDdURjdDWys0KYI4D: Hello World, without E2E Encryption
 Message received: Hello World, without E2E Encryption
-Received 1  
+Received 1 
 ```
 
 Note that when duplicating folders to create multiple client instances locally, you need to ensure you are not also copying over contact files and session folders. You can comfortably delete session folders since each new `NewClient()` call will generate new cryptographic identities, but only if there isn't an existing session.
@@ -513,7 +513,7 @@ Sending encrypted payloads requires an authenticated channel to be established b
 ```go
 // Send safe message with authenticated channel, requires an authenticated channel
 
-// Test message 
+// Test message
 msgBody := "If this message is sent successfully, we'll have established first contact with aliens."
 
 msg := message.Send{
@@ -526,7 +526,7 @@ paramsE2E := params.GetDefaultE2E()
 
 fmt.Printf("Sending to %s: %s\n", recipientID, msgBody)
 roundIDs, _, _, err := client.SendE2E(msg,
-		paramsE2E)
+	paramsE2E)
 if err != nil {
 	fmt.Printf("%+v", err)
 }
@@ -635,49 +635,49 @@ func main() {
 	// Create a new client object-------------------------------------------------------
 
 	// You would ideally use a configuration tool to acquire these parameters
-statePath := "statePath"
-statePass := "password"
-// The following connects to mainnet. For historical reasons it is called a json file
-// but it is actually a marshalled file with a cryptographic signature attached.
-// This may change in the future. 
+	statePath := "statePath"
+	statePass := "password"
+	// The following connects to mainnet. For historical reasons it is called a json file
+	// but it is actually a marshalled file with a cryptographic signature attached.
+	// This may change in the future.
 	ndfURL := "https://elixxir-bins.s3.us-west-1.amazonaws.com/ndf/mainnet.json"
 	certificatePath := "mainnet.crt"
-ndfPath := "ndf.json"
+	ndfPath := "ndf.json"
 
-// Create the client if there is no session
+	// Create the client if there is no session
 	if _, err := os.Stat(statePath); os.IsNotExist(err) {
 		var ndfJSON []byte
-	if ndfPath != "" {
+		if ndfPath != "" {
 			ndfJSON, err = ioutil.ReadFile(ndfPath)
-    if err != nil {
+			if err != nil {
 				fmt.Printf("Could not read NDF: %+v", err)
-    }
-	} 
+			}
+		}
 		if ndfJSON == nil {
 			cert, err := ioutil.ReadFile(certificatePath)
-		if err != nil {
+			if err != nil {
 				fmt.Printf("Failed to read certificate: %v", err)
 			}
 
 			ndfJSON, err = api.DownloadAndVerifySignedNdfWithUrl(ndfURL, string(cert))
 			if err != nil {
 				fmt.Printf("Failed to download NDF: %+v", err)
+			}
+		}
+		err = api.NewClient(string(ndfJSON), statePath, []byte(statePass), "")
+		if err != nil {
+			fmt.Printf("Failed to create new client: %+v", err)
 		}
 	}
-	err = api.NewClient(string(ndfJSON), statePath, []byte(statePass), "")
-	if err != nil {
-			fmt.Printf("Failed to create new client: %+v", err)
-	}
-}
 
 	// Login to your client session-----------------------------------------------------
 
 	// Login with the same sessionPath and sessionPass used to call NewClient()
-// Assumes you have imported "gitlab.com/elixxir/client/interfaces/params"
-client, err := api.Login(statePath, []byte(statePass), params.GetDefaultNetwork())
-if err != nil {
+	// Assumes you have imported "gitlab.com/elixxir/client/interfaces/params"
+	client, err := api.Login(statePath, []byte(statePass), params.GetDefaultNetwork())
+	if err != nil {
 		fmt.Printf("Failed to initialize client: %+v", err)
-}
+	}
 
 	// view current user identity--------------------------------------------------------
 	user := client.GetUser()
@@ -686,14 +686,14 @@ if err != nil {
 	// Register a listener for messages--------------------------------------------------
 
 	// Set up a reception handler
-swboard := client.GetSwitchboard()
-// Note: the receiverChannel needs to be large enough that your reception thread will
-// process the messages. If it is too small, messages can be dropped or important xxDK
-// threads could be blocked.
-receiverChannel := make(chan message.Receive, 10000)
-// Note that the name `listenerID` is arbitrary
-listenerID := swboard.RegisterChannel("DefaultCLIReceiver",
-	switchboard.AnyUser(), message.XxMessage, receiverChannel)
+	swboard := client.GetSwitchboard()
+	// Note: the receiverChannel needs to be large enough that your reception thread will
+	// process the messages. If it is too small, messages can be dropped or important xxDK
+	// threads could be blocked.
+	receiverChannel := make(chan message.Receive, 10000)
+	// Note that the name `listenerID` is arbitrary
+	listenerID := swboard.RegisterChannel("DefaultCLIReceiver",
+		switchboard.AnyUser(), message.XxMessage, receiverChannel)
 	fmt.Printf("Message ListenerID: %v", listenerID)
 
 	// Start network threads------------------------------------------------------------
@@ -701,113 +701,113 @@ listenerID := swboard.RegisterChannel("DefaultCLIReceiver",
 	networkFollowerTimeout := 5 * time.Second
 
 	// Set networkFollowerTimeout to a value of your choice (seconds)
-err = client.StartNetworkFollower(networkFollowerTimeout)
-if err != nil {
+	err = client.StartNetworkFollower(networkFollowerTimeout)
+	if err != nil {
 		fmt.Printf("Failed to start network follower: %+v", err)
-}
+	}
 
-waitUntilConnected := func(connected chan bool) {
-  // Assumes you have imported the `time` package
-	waitTimeout := time.Duration(150)
-	timeoutTimer := time.NewTimer(waitTimeout * time.Second)
-	isConnected := false
-	// Wait until we connect or panic if we cannot by a timeout
-	for !isConnected {
-		select {
-		case isConnected = <-connected:
+	waitUntilConnected := func(connected chan bool) {
+		// Assumes you have imported the `time` package
+		waitTimeout := time.Duration(150)
+		timeoutTimer := time.NewTimer(waitTimeout * time.Second)
+		isConnected := false
+		// Wait until we connect or panic if we cannot by a timeout
+		for !isConnected {
+			select {
+			case isConnected = <-connected:
 				fmt.Printf("Network Status: %v\n",
-				isConnected)
-			break
-		case <-timeoutTimer.C:
+					isConnected)
+				break
+			case <-timeoutTimer.C:
 				fmt.Printf("timeout on connection")
+			}
 		}
 	}
-}
 
-// Create a tracker channel to be notified of network changes
-connected := make(chan bool, 10)
-// AddChannel() adds a channel to the list of Tracker channels that will be
+	// Create a tracker channel to be notified of network changes
+	connected := make(chan bool, 10)
+	// AddChannel() adds a channel to the list of Tracker channels that will be
 	// notified of network changes
-client.GetHealth().AddChannel(connected)
-// Wait until connected or crash on timeout
-waitUntilConnected(connected)
+	client.GetHealth().AddChannel(connected)
+	// Wait until connected or crash on timeout
+	waitUntilConnected(connected)
 
 	// Register a handler for authenticated channel requests-----------------------------
 
-// Handler for authenticated channel requests
+	// Handler for authenticated channel requests
 	confirmChanRequest := func(requestor contact.Contact) {
-	// Check if a channel exists for this recipientID
-	recipientID := requestor.ID
-	if client.HasAuthenticatedChannel(recipientID) {
+		// Check if a channel exists for this recipientID
+		recipientID := requestor.ID
+		if client.HasAuthenticatedChannel(recipientID) {
 			fmt.Printf("Authenticated channel already in place for %s",
-			recipientID)
-		return
-	}
-	// GetAuthenticatedChannelRequest returns the contact received in a request if
-	// one exists for the given userID.  Returns an error if no contact is found.
-	recipientContact, err := client.GetAuthenticatedChannelRequest(recipientID)
-	if err == nil {
-			fmt.Printf("Accepting existing channel request for %s",
-			recipientID)
-		// ConfirmAuthenticatedChannel() creates an authenticated channel out of a valid
-		// received request and informs the requestor that their request has
-		// been confirmed
-		roundID, err := client.ConfirmAuthenticatedChannel(recipientContact)
-			fmt.Printf("Accepted existing channel request in round %v",
-			roundID)
-		if err != nil {
-				fmt.Printf("%+v", err)
+				recipientID)
+			return
 		}
-		return
+		// GetAuthenticatedChannelRequest returns the contact received in a request if
+		// one exists for the given userID.  Returns an error if no contact is found.
+		recipientContact, err := client.GetAuthenticatedChannelRequest(recipientID)
+		if err == nil {
+			fmt.Printf("Accepting existing channel request for %s",
+				recipientID)
+			// ConfirmAuthenticatedChannel() creates an authenticated channel out of a valid
+			// received request and informs the requestor that their request has
+			// been confirmed
+			roundID, err := client.ConfirmAuthenticatedChannel(recipientContact)
+			fmt.Printf("Accepted existing channel request in round %v",
+				roundID)
+			if err != nil {
+				fmt.Printf("%+v", err)
+			}
+			return
+		}
 	}
-}
 
-// Register `confirmChanRequest` as the handler for auth channel requests
-authManager := client.GetAuthRegistrar()
-authManager.AddGeneralRequestCallback(confirmChanRequest)
+	// Register `confirmChanRequest` as the handler for auth channel requests
+	authManager := client.GetAuthRegistrar()
+	authManager.AddGeneralRequestCallback(confirmChanRequest)
 
 	// Request auth channels from other users---------------------------------------------
 
 	// Sender's contact for requesting auth channels
-me := client.GetUser().GetContact()
+	me := client.GetUser().GetContact()
 
-// Recipient's contact (read from a Client CLI-generated contact file)
+	// Recipient's contact (read from a Client CLI-generated contact file)
 	contactData, _ := ioutil.ReadFile("../user1b/user-contact1b.json")
 	// Assumes you have imported "gitlab.com/elixxir/crypto/contact"
-// which provides an `Unmarshal` function to convert the byte slice ([]byte) output
-// of `ioutil.ReadFile()` to the `Contact` type expected by `RequestAuthenticatedChannel()`
-recipientContact, _ := contact.Unmarshal(contactData)
-recipientID := recipientContact.ID
+	// which provides an `Unmarshal` function to convert the byte slice ([]byte) output
+	// of `ioutil.ReadFile()` to the `Contact` type expected by `RequestAuthenticatedChannel()`
+	recipientContact, _ := contact.Unmarshal(contactData)
+	recipientID := recipientContact.ID
 
-roundID, authReqErr := client.RequestAuthenticatedChannel(recipientContact, me, "Hi! Let's connect!")
-if authReqErr == nil {
+	roundID, authReqErr := client.RequestAuthenticatedChannel(recipientContact, me, "Hi! Let's connect!")
+	if authReqErr == nil {
 		fmt.Printf("Requested auth channel from: %s in round %d",
-		recipientID, roundID)
-} else {
+			recipientID, roundID)
+	} else {
 		fmt.Printf("%+v", err)
-}
+	}
 
 	// Send a message to another user----------------------------------------------------
 
-// Send safe message with authenticated channel, requires an authenticated channel
+	// Send safe message with authenticated channel, requires an authenticated channel
 
-// Test message 
-msgBody := "If this message is sent successfully, we'll have established first contact with aliens."
+	// Test message
+	msgBody := "If this message is sent successfully, we'll have established first contact with aliens."
 
-msg := message.Send{
-	Recipient:   recipientID,
-	Payload:     []byte(msgBody),
-	MessageType: message.XxMessage,
-}
-// Get default network parameters for E2E payloads
-paramsE2E := params.GetDefaultE2E()
+	msg := message.Send{
+		Recipient:   recipientID,
+		Payload:     []byte(msgBody),
+		MessageType: message.XxMessage,
+	}
+	// Get default network parameters for E2E payloads
+	paramsE2E := params.GetDefaultE2E()
 
-fmt.Printf("Sending to %s: %s\n", recipientID, msgBody)
-roundIDs, _, _, err := client.SendE2E(msg,
+	fmt.Printf("Sending to %s: %s\n", recipientID, msgBody)
+	roundIDs, _, _, err := client.SendE2E(msg,
 		paramsE2E)
-if err != nil {
+	if err != nil {
 		fmt.Printf("%+v", err)
-}
+	}
 	fmt.Printf("Message sent in RoundIDs: %+v\n", roundIDs)
 
 	// Keep app running to receive messages-----------------------------------------------
