@@ -328,6 +328,24 @@ import (
 
 In summary, `StartNetworkFollower()` kicks off tracking of the network. It starts long-running threads and returns an object for checking state and stopping those threads. However, since these threads may become a significant drain on device batteries when offline, you will want to ensure they are stopped if there is no internet access.
 
+:::info
+
+Note that it’s normal to see an error that looks like the following when you start the network threads:
+
+```
+ERROR 2022/03/01 21:23:30 Failed to register node: Failed to request key: rpc error: code = Unknown desc = unable to connect to target host 6MhL3ueewpss4stt98fNKrW/EJ5WD6JCAGQLvU8mb7MB.
+```
+
+This is another possible variation:
+
+```
+ERROR 2022/03/01 12:32:51 Failed to register node: Failed to request key: rpc error: code = Unknown desc = rpc error: code = Unknown desc = Contacted server does not have an ndf to give
+```
+
+This simply means that the client couldn't reach a gateway for some reason. However, it's not a failure and the client can continue operations normally regardless.
+
+:::
+
 ## Request Authenticated Channels
 
 There are two ways to send messages across the network: with or without end-to-end (E2E) encryption. Sending messages safely, with E2E encryption, requires an authenticated channel to be established between the communicating parties.
