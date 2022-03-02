@@ -175,7 +175,7 @@ There are multiple URL/certificate pairs associated with different environments.
 1. MainNet: [NDF URL](https://elixxir-bins.s3.us-west-1.amazonaws.com/ndf/mainnet.json) 
 2. Release: [NDF URL](https://elixxir-bins.s3.us-west-1.amazonaws.com/ndf/release.json)  
 
-For each environment (for example, mainnet), you can download the NDF and extract the signing certificate from the NDF with:
+Mainnet is the main public network while release is a development network. For each environment (for example, mainnet), you can download the NDF and extract the signing certificate from the NDF with:
 `echo -e $(base64 -d mainnet.json | head -2 | tail -1 | tr -dc '[[:print:]]' | jq .Registration.Tls_certificate) | sed 's/\"//g' > ndf.crt` 
 
 You can also copy and paste the certificates directly from the [command line source code](https://git.xx.network/elixxir/client/-/blob/d8832766fe26b02ef90b7998b2f0083be77b7b0f/cmd/root.go#L56).
