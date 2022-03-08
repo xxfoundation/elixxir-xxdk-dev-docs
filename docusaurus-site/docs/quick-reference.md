@@ -267,6 +267,14 @@ func (c *Client) GetAuthenticatedChannelRequest(partner *id.ID) (contact.Contact
 
 `GetAuthenticatedChannelRequest` returns the contact received in a request if one exists for the given userID. Returns an error if no contact is found.
 
+### func (*Client) GetBackup
+
+```go
+func (c *Client) GetBackup() *interfaces.BackupContainer
+```
+
+`GetBackup` returns a pointer to the backup container so that the backup can be set and triggered.
+
 ### func (*Client) GetComms
 
 ```go
@@ -470,6 +478,15 @@ func (c *Client) RequestAuthenticatedChannel(recipient, me contact.Contact,
 ```
 
 `RequestAuthenticatedChannel` sends a request to another party to establish an authenticated channel. It will not run if the network state is not healthy. An error will be returned if a channel already exists or if a request was already received. When a confirmation occurs, the channel will be created and the callback will be called. Can be retried.
+
+### func (*Client) ResetSession
+
+```go
+func (c *Client) ResetSession(recipient, me contact.Contact,
+        message string) (id.Round, error)
+```
+
+`ResetSession` resets an authenticate channel that already exists.
 
 ### func (*Client) SendCMIX
 
