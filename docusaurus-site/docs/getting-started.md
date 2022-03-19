@@ -10,7 +10,7 @@ The rest of this document outlines the steps for building a simple messaging app
 
 ## Set Up the Client Locally
 
-<!-- The following sections show how to connect to the public xx cMix network. When building your application, it is recommended to test with a [local instance of the cMix network](https://git.xx.network/elixxir/integration). -->
+The following sections show how to connect to the public xx cMix network. We recommend testing with a [local instance of the cMix network](https://git.xx.network/elixxir/integration) when building your application.
 
 [Skip CLI setup](#import-the-api)
 
@@ -540,6 +540,8 @@ There are three steps involved when sending messages:
 3. **Send message:** Finally, you can send your message using `client.SendE2E()`. This will return the list of rounds in which parts of your message were sent or an error if the call was unsuccessful.
 
 :::note
+The "RoundIDs" are the rounds in which your message parts were sent. After those rounds have completed on the network, you can assume that the message has "sent" successfully. See the client interface section for info on how to access round state changes.
+
 In addition to the round IDs and error message, `client.SendE2E()` returns two additional items: the message ID and the timestamp for when the message was sent. <!-- See the API reference for more information. -->
 :::
 
