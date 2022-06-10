@@ -112,8 +112,8 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['swift'],
       },
     }),
 };
-
 module.exports = config;
