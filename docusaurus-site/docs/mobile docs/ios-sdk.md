@@ -86,23 +86,32 @@ guard isConnected else { /* try again */ }
 ## Send Rest-like message
 The instructions below describe how to use the restlike API to send requests and receive messages like a rest API.
 
-1. First, to initiate a connection with the remote, use an unauthenticated connection. (To get remote identity, please refer to [this](https://git.xx.network/elixxir/client/-/blob/release/restlike/README.md) )
+1. First, create an E2E client.
+
+```swift
+/*
+//Blocking call, do it on the background thread.
+*/
+let clientE2E = try ClientE2ELogin.live(with: client)
+```
+
+2. Next, to initiate a connection with the remote, use an unauthenticated connection. (To get remote identity, please refer to [this](https://git.xx.network/elixxir/client/-/blob/release/restlike/README.md).)
 
 ```swift
 /*
 //Blocking call, do it on the background thread
 // You need your remote identity.
 */
-let connection = try client.connect(withAuthentication: false, recipientContact: REMOTE_IDENTITY, myIdentity: myIdentity)
+let connection = try client.connect(withAuthentication: false, recipientContact: REMOTE_IDENTITY, e2eId: clientE2E.getId())
 ```
 
-2. Next, create a RequestSender.
+3. Next, create a `RequestSender`.
 
 ```swift
 let restLikeRequestSender = RestlikeRequestSender.live(authenticated: false)
 ```
 
-3. Create your request that you will send.
+4. Create your request that you will send.
 
 ```swift
 /*
@@ -119,7 +128,7 @@ let request = RestlikeMessage(
    error: String)
 ```
 
-4. Send your request and wait for a response.
+5. Send your request and wait for a response.
 
 ```swift
 /*
@@ -142,17 +151,27 @@ DispatchQueue.main.async {
 ```
 
 ## Send E2E message
-1. Initiate a connection with the remote. We will use an unauthenticated connection.  (To get remote identity, please refer to [this](https://git.xx.network/elixxir/client/-/blob/release/restlike/README.md) )
+
+1. First, create an E2E client.
 
 ```swift
 /*
-//Blocking call, do it on the background thread
+//Blocking call, do it on the background thread.
+*/
+let clientE2E = try ClientE2ELogin.live(with: client)
+```
+
+2. Next, to initiate a connection with the remote, use an unauthenticated connection. (To get remote identity, please refer to [this](https://git.xx.network/elixxir/client/-/blob/release/restlike/README.md).)
+
+```swift
+/*
+// Blocking call, do it on the background thread
 // You need your remote identity.
 */
 let connection = try client.connect(
   withAuthentication: false,
   recipientContact: REMOTE_IDENTITY,
-  myIdentity: myIdentity)
+  e2eId: clientE2E.getId())
 ```
 
 2. Setup your messages listener.
