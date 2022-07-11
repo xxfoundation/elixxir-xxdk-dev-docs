@@ -60,6 +60,14 @@ const config = {
           },
         ],
       },
+      announcementBar: {
+      id: 'announcement-bar',
+      content:
+        'We are currently updating these docs. Please <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/Y8pCkbK">reach out on Discord</a> with any questions about using the xxDK.',
+      backgroundColor: '#18191ade',
+      textColor: '#fff',
+      isCloseable: false,
+    },
       footer: {
         style: 'dark',
         links: [
