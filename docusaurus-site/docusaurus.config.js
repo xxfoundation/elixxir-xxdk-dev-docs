@@ -40,6 +40,11 @@ const config = {
       colorMode: {
         defaultMode: 'dark',
       },
+      docs: {
+        sidebar: {
+          hideable: true,
+        },
+      },
       navbar: {
         title: 'Client API (xxDK)',
         logo: {
