@@ -49,7 +49,7 @@ const config = {
         title: 'Client API (xxDK)',
         logo: {
           alt: 'The xx network Logo',
-          src: 'img/xx_network.jpg',
+          src: 'img/xx_network.svg',
         },
         items: [
           {
