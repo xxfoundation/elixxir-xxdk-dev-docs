@@ -21,6 +21,7 @@ const sidebars = {
         'mobile docs/ios-sdk',
       ],
     },
+    'guides/ndf-retrieval',
     'technical-glossary',
   ],
 };
