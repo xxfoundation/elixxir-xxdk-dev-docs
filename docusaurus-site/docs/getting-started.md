@@ -117,29 +117,32 @@ A new Reception Identity can be created by passing a `Cmix` object to `MakeRecep
 
 The Reception Identity has keying material in it, so it is crucial that it is stored in an encrypted location. `StoreReceptionIdentity()` handles this automatically, which is the recommended way to store identities. This way, a user only has to save the lookup key, which can be stored arbitrarily.  Similarly, a saved identity can be retrieved from the Client Keystore using `LoadReceptionIdentity()`.
 <details>
-<summary>Code sample</summary>
-<div>
-<pre>
-<code>
-// Sample key for storing reception identity object
-identityStorageKey := "identityStorageKey"
 
+<summary>Code sample</summary>
+
+```mdx-code-block
+import CodeBlock from '@theme/CodeBlock';
+
+<CodeBlock className="language-go" showLineNumbers>
+  {
+	`// Sample key for storing reception identity object
+identityStorageKey := "identityStorageKey"
+	
 // If no extant xxdk.ReceptionIdentity, generate and store a new one
 identity, err := xxdk.LoadReceptionIdentity(identityStorageKey, net)
 if err != nil {
 	identity, err = xxdk.MakeReceptionIdentity(net)
-	if err != nil {
-		// Handle failed to generate reception identity error
-	}
-	err = xxdk.StoreReceptionIdentity(identityStorageKey, identity, net)
-	if err != nil {
-		// Handle failed to store new reception identity error
-	}
+if err != nil {
+	// Handle failed to generate reception identity error
 }
-</code>
-</pre>
+err = xxdk.StoreReceptionIdentity(identityStorageKey, identity, net)
+if err != nil {
+	// Handle failed to store new reception identity error
+}
+`}
+</CodeBlock>
+```
 <p>Note that the identity storage key is simply a dictionary lookup key used to access a stored identity.</p>
-</div>
 </details>
 
 #### Writing Contacts to File
@@ -174,36 +177,39 @@ func (* Cmix) StartNetworkFollower(timeout time.Duration) error
 <summary>Code sample</summary>
 <div>
 <p>For our application, we have also set up a function that starts network threads and waits until the network is healthy before proceeding.</p>
-<pre>
-<code>
-// Set networkFollowerTimeout to a value of your choice (seconds)
-networkFollowerTimeout := 5 * time.Second
 
+```mdx-code-block
+<CodeBlock className="language-go" showLineNumbers>
+  {
+	`// Set networkFollowerTimeout to a value of your choice (seconds)
+networkFollowerTimeout := 5 * time.Second
+    
 err = connectServer.User.StartNetworkFollower(networkFollowerTimeout)
 if err != nil {
 	// Handle failed to start network follower error
 }
-
+    
 // Create a tracker channel to be notified of network changes
 connected := make(chan bool, 10)
-
+    
 // Provide a callback that will be signalled when network health
 // status changes
 connectServer.User.GetCmix().AddHealthCallback(
 	func(isConnected bool) {
 		connected <- isConnected
 	})
-
+    
 // You may implement a function which retries
 // attempts to connect to the network
 waitUntilConnected := func(connected chan bool) {
 	// ...
 }
-
+    
 // Wait until connected or crash on timeout
 waitUntilConnected(connected)
-</code>
-</pre>
+`}
+</CodeBlock>
+```
 </div>
 </details>
 
@@ -247,51 +253,51 @@ When a message matching the registered listener is received, the `Hear()` functi
 <details>
 <summary>Code sample</summary>
 <div>
-<pre>
-<code>
-// listener.go
-
+<CodeBlock className="language-go" showLineNumbers>
+  {
+	`// listener.go
+    
 // ...
-
-<!-- import (
+      
+import (
 	jww "github.com/spf13/jwalterweatherman"
 	"gitlab.com/elixxir/client/connect"
 	"gitlab.com/elixxir/client/e2e/receive"
 	"gitlab.com/elixxir/client/catalog"
 	"gitlab.com/elixxir/client/xxdk"
-) -->
-
+)
+    
 // listener adheres to the receive.Listener interface.
 type listener struct {
 	name string
 	connection connect.Connection
 }
-
+    
 // Hear will be called whenever a message matching the RegisterListener call is
 // received; User-defined message handling logic goes here.
 func (l *listener) Hear(item receive.Message) {
 	jww.INFO.Printf("Message received: %v", item)
-
+    
 	// Acknowledge connection by sending a response
 	respond(l.connection)
 }
-
+    
 // Name is used for debugging purposes.
 func (l *listener) Name() string {
 	return l.name
 }
-
+    
 func respond(connection connect.Connection) {
 	msgBody := "Hi, I'm the server, and you just connected to me."
-
+    
 	roundIDs, messageID, timeSent, err := connection.SendE2E(catalog.XxMessage, []byte(msgBody), xxdk.GetDefaultE2EParams().Base)
 	if err != nil {
 		// Handle failed to send message error
 	}
 	jww.INFO.Printf("Message %v sent in RoundIDs: %+v at %v", messageID, roundIDs, timeSent)
 }
-</code>
-</pre>
+`}
+</CodeBlock>
 </div>
 </details>
 
@@ -306,7 +312,7 @@ import "gitlab.com/elixxir/client/catalog"
 
 // Create callback for incoming connections
 connectionCallback := func(connection connect.Connection) {
-// User-defined behavior for message reception goes in the listene
+// User-defined behavior for message reception goes in the listener
 	_, err = connection.RegisterListener(
  		catalog.NoType, &listener{"connection server listener", connection})
 	if err != nil {
@@ -336,21 +342,22 @@ func StartServer(identity xxdk.ReceptionIdentity, connectionCallback Callback,
 <details>
 <summary>Code sample</summary>
 <div>
-<pre>
-<code>
-import "gitlab.com/elixxir/client/connect"
 
+<CodeBlock className="language-go" showLineNumbers>
+  {
+	`import "gitlab.com/elixxir/client/connect"
+    
 // Start the connection server, which will allow clients to start connections with you
 e2eParams := xxdk.GetDefaultE2EParams()
 connectionListParams := connect.DefaultConnectionListParams()
-
+    
 connectServer, err := connect.StartServer(
 	identity, connectionCallback, net, e2eParams, connectionListParams)
 if err != nil {
 	// Handle unable to start connection server error
 }
-</code>
-</pre>
+`}
+</CodeBlock>
 </div>
 </details>  
 
@@ -399,32 +406,33 @@ func Connect(recipient contact.Contact, user *xxdk.E2e, p xxdk.E2EParams)
 <details>
 <summary>Code sample</summary>
 <div>
-<pre>
-<code>
-// Path to the server contact file
-serverContactPath := "../connectServer/connectServer.xxc"
 
+<CodeBlock className="language-go" showLineNumbers>
+  {
+	`// Path to the server contact file
+serverContactPath := "../connectServer/connectServer.xxc"
+    
 // Read the server's contact data
 contactData, err := ioutil.ReadFile(serverContactPath)
 if err != nil {
 	// Handle failed to read server contact file error
 }
-
+    
 // Import "gitlab.com/elixxir/crypto/contact" which provides
-// an `Unmarshal` function to convert the byte slice output
-// of `ioutil.ReadFile()`to the `Contact` type expected by `Connect()`
+// an \`Unmarshal\` function to convert the byte slice output
+// of \`ioutil.ReadFile()\`to the \`Contact\` type expected by \`Connect()\`
 recipientContact, err := contact.Unmarshal(contactData)
 if err != nil {
 	// Handle failed to get contact data error
 }
-
+    
 // Create the connection
 handler, err := connect.Connect(recipientContact, user, params)
 if err != nil {
 	// Handle failed to create connection object error
 }
-</code>
-</pre>
+`}
+</CodeBlock>
 </div>
 </details>  
 
@@ -450,36 +458,37 @@ You will also want to implement the `Listener` interface just as we did for the 
 <details>
 <summary>Code sample</summary>
 <div>
-<pre>
-<code>
-// listener.go
 
+<CodeBlock className="language-go" showLineNumbers>
+  {
+	`// listener.go
+    
 package main
-
-<!-- import (
+    
+import (
 	jww "github.com/spf13/jwalterweatherman"
-
+    
 	"gitlab.com/elixxir/client/e2e/receive"
-) -->
-
+)
+    
 // listener implements the receive.Listener interface
 type listener struct {
 	name string
 }
-
+    
 // Hear will be called whenever a message matching
 // the RegisterListener call is received
 // User-defined message handling logic goes here
 func (l listener) Hear(item receive.Message) {
 	jww.INFO.Printf("Message received: %v", item)
 }
-
+    
 // Name is used for debugging purposes
 func (l listener) Name() string {
 	return l.name
 }
-</code>
-</pre>
+`}
+</CodeBlock>
 </div>
 </details>
 
@@ -502,22 +511,23 @@ It expects the following arguments:
 
 <details>
 <summary>Code sample</summary>
-<div>
-<pre>
-<code>
-// Test message
 
+<CodeBlock className="language-go" showLineNumbers>
+  {
+	`// Test message
 msgBody := "If this message is sent successfully, we'll have established contact with the server."
-
+    
 params := xxdk.GetDefaultE2EParams() // defined earlier
-
+    
 roundIDs, messageID, timeSent, err := handler.SendE2E(catalog.XxMessage, []byte(msgBody), params.Base)
 if err != nil {
 	// Handle failed to send message error
 }
 jww.INFO.Printf("Message %v sent in RoundIDs: %+v at %v", messageID, roundIDs, timeSent)
-</code>
-</pre>
+`}
+</CodeBlock>
+
+<div>
 </div>
 </details> 
 
