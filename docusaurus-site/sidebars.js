@@ -16,7 +16,6 @@ const sidebars = {
       link: {
         type: 'generated-index',
       },
-      collapsed: false,
       items: [
         'mobile docs/ios-sdk',
       ],
@@ -27,7 +26,6 @@ const sidebars = {
       link: {
         type: 'generated-index',
       },
-      collapsed: false,
       items: [
         'guides/cmix-client-keystore',
         'guides/ndf-retrieval',
