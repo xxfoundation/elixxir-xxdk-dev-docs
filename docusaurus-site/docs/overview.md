@@ -35,7 +35,7 @@ The [API Quick Reference](https://pkg.go.dev/gitlab.com/elixxir/client/xxdk) pro
 
 ### Technical Glossary
 
-The [technical glossary](./technical-glossary) provides meanings to unfamiliar terms and concepts specific to the cMix system.
+The [Technical Glossary](./technical-glossary) offers meanings to unfamiliar terms and concepts specific to the cMix system.
 
 <!-- ### FAQs
 

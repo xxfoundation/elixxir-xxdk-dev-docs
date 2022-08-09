@@ -31,3 +31,16 @@ pre {
   max-height: 400px;
   overflow-y: auto;
 }
+
+/* for image caption */
+img + em {
+    font-style: normal;
+    display: inherit;
+    text-align: center;
+    font-size: 80%;
+    color: #808080cc;
+}
+
+details > summary {
+  font-weight: bold;
+}

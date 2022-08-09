@@ -12,13 +12,25 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Mobile Docs',
+      label: 'Building for Mobile',
       link: {
         type: 'generated-index',
       },
       collapsed: false,
       items: [
         'mobile docs/ios-sdk',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Reference Guides',
+      link: {
+        type: 'generated-index',
+      },
+      collapsed: false,
+      items: [
+        'guides/cmix-client-keystore',
+        'guides/ndf-retrieval',
       ],
     },
     'technical-glossary',
