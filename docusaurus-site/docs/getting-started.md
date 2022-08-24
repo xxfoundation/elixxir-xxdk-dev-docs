@@ -34,7 +34,7 @@ We include a sample scenario in [*Putting It All Together*](#putting-it-all-toge
 This section briefly discusses commonalities between client and server applications—steps that any cMix client needs to be set up correctly.  They include:
 
 1. Fetching an NDF
-2. Creating and initializing a cMix object
+2. Initializing and loading a cMix client keystore
 3. Creating a reception identity
 4. Starting network threads
 
@@ -46,7 +46,7 @@ Once the most basic steps are completed, a cMix client acting as a ‘server’ 
 "gitlab.com/elixxir/client/connect"
 ```
 
-Skip over to [*Setting Up a Connect Server*](#setting-up-a-connect-server) to browse server-specific steps and [*Setting Up a Connect Client*](#setting-up-a-connect-client) for steps specific to a client application. 
+Skip over to [*Setting Up a Connect Server*](#setting-up-a-connect-server) below to browse server-specific steps and [*Setting Up a Connect Client*](#setting-up-a-connect-client) for steps specific to a client application. 
 
 ### Import the xxDK
 
@@ -64,7 +64,7 @@ To ensure you are using the latest release version of the client, you can run `g
 
 ### Fetching the NDF
 
-The NDF, or network definition file, is a signed file with a [predefined structure](https://xxnetwork.wiki/Network_Definition_File_(NDF)) containing the current network state and configuration for a target network.  For deployed applications, the NDF should be queried from one or a few trusted network gateways. See [NDF Retrieval](./guides/ndf-retrieval)  for recommendations on how to retrieve an NDF and establish trust with one or more gateways.
+The NDF, or network definition file, is a signed file with a [predefined structure](https://xxnetwork.wiki/Network_Definition_File_(NDF)) containing the current network state and configuration for a target network.  For deployed applications, the NDF should be queried from one or a few trusted network gateways. See *[NDF Retrieval](./guides/ndf-retrieval)* for recommendations on how to retrieve an NDF and establish trust with one or more gateways.
 
 ### Create a Client Keystore
 
@@ -107,7 +107,7 @@ if err != nil {
 }
 ```
 
-This call starts communication with the network and registers your client with the [permissioning server](https://xxdk-dev.xx.network/technical-glossary#permissioning-server). This enables you to keep track of the network state for message sending and retrieval.
+This call starts communication with the network and registers your client with the [permissioning server](https://xxdk-dev.xx.network/technical-glossary#permissioning-server),  which schedules cMix rounds within the network and manages the NDF for cMix nodes and clients. This enables you to keep track of the network state for message sending and retrieval.
 
 ### Creating Reception Identities
 
@@ -219,7 +219,7 @@ The `connect` package provides a quick and convenient way of establishing client
 
 ## Setting Up a Connect Server
 
-Creating a server capable of interacting with clients is a very straightforward process using connections. Almost all the code required is standard, with business logic relevant to your specific implementation needs is handled entirely in two places—message listeners and the connection callbacks. Pay special attention to these sections when writing a server application.
+Creating a server capable of interacting with clients is a very straightforward process using connections. Almost all the code required is standard, with business logic relevant to your specific implementation needs handled entirely in two places—message listeners and the connection callbacks. Pay special attention to these sections when writing a server application.
 
 ### Enabling Message Reception
 
@@ -333,9 +333,9 @@ func StartServer(identity xxdk.ReceptionIdentity, connectionCallback Callback,
 
 `StartServer()` assembles a `Connection` object on the server-side and feeds it into the given `Callback` whenever an incoming request for an end-to-end (E2E) partnership with a client completes successfully. It expects the following arguments:
 
-- `identity`: This is the reception identity of the cMix client, created in [*Creating Reception Identities.*](#creating-reception-identities).
+- `identity`: This is the reception identity of the cMix client, created in [*Creating Reception Identities*](#creating-reception-identities).
 - `connectionCallback`: The callback that will handle incoming client connections.
-- `net`: This is the cMix object created in [*Create a Client Keystore*](#create-a-client-keystore)
+- `net`: This is the cMix object created in [*Create a Client Keystore*](#create-a-client-keystore).
 - `params`: Network parameters for sending E2E messages over the cMix network. Includes authentication and rekey parameters amongst others. Use `xxdk.GetDefaultE2EParams()` for the default settings.
 - `clParams`:  Parameters that determine the frequency of stale connection cleanups. Use `connect.DefaultConnectionListParams()` for the default settings.
 
@@ -378,7 +378,7 @@ func Login(net *Cmix, callbacks AuthCallbacks, identity ReceptionIdentity,
 
 `Login()` expects the following arguments:
 
-1. `net`: This is the cMix object created in [*Create a Client Keystore*](#create-a-client-keystore) 
+1. `net`: This is the cMix object created in [*Create a Client Keystore*](#create-a-client-keystore). 
 2. `callbacks`: These are the callbacks for handling E2E relationship operations between cMix clients. The `connect` package will handle these independently, thus one can simply feed in the same struct (`xxdk.DefaultAuthCallbacks{}`) shown in the sample code below which provides basic implementations of these callbacks.
 3. `identity`: This is the same identity created in [*Creating Reception Identities.*](#creating-reception-identities)
 4. `params`: These are network parameters for sending E2E messages over the cMix network. Use `xxdk.GetDefaultE2EParams()` for the default settings.
